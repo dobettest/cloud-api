@@ -1,0 +1,37 @@
+{
+  "name": "cloud-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "start": "cross-env NODE_ENV=production nodemon ./bin/www"
+  },
+  "dependencies": {
+    "@cloudbase/manager-node": "^3.11.0",
+    "@cloudbase/node-sdk": "^2.7.1",
+    "@hapi/joi": "^17.1.1",
+    "canvas": "^2.8.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "ioredis": "^4.28.0",
+    "jsonwebtoken": "^8.5.1",
+    "lru-cache": "^6.0.0",
+    "minimist": "^1.2.5",
+    "mongoose": "^6.0.12",
+    "morgan": "~1.9.1",
+    "my-cors": "^1.0.2",
+    "nanoid": "^3.1.30",
+    "node-email": "^0.0.1",
+    "nodemon": "^2.0.14",
+    "tencent-sms": "^0.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "fs-promise": "^2.0.3",
+    "nan": "^2.15.0"
+  }
+}
