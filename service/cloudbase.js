@@ -1,6 +1,7 @@
 // 假设在上海地域 云函数下，则默认 region 为上海，信息一致
 const CloudBase = require('@cloudbase/manager-node');
 const tcb = require('@cloudbase/node-sdk');
+const { functionValidator } = require('../model/function');
 const secretId = "AKIDd4FBsKHgeP1PcaEkxyjETSCgusd8NxJQ";
 const secretKey = "1nKhogIeldGdp69xXsypQ1Tm1YFk02qP";
 const { env } = new CloudBase({
@@ -36,22 +37,21 @@ class cloudbaseService {
         return envId;
     }
     static createClient(envId) {
-        const { env } = new CloudBase({
+        return new CloudBase({
             secretId,
             secretKey,
             envId,
         })
-        return env;
     }
     static async createCustomLoginKeys(envId) {
-        const env = await this.createClient(envId);
+        const { env } = await this.createClient(envId);
         const { KeyID, PrivateKey } = await env.createCustomLoginKeys();
         return {
             KeyID,
             PrivateKey
         }
     }
-    static async createTicket({ env, customUserId, private_key_id, private_key }) {
+    static async createTicket(env, customUserId, private_key_id, private_key) {
         try {
             const app = tcb.init({
                 env,
@@ -70,6 +70,11 @@ class cloudbaseService {
             console.log(error);
             return '';
         }
+    }
+    static async createFunction(envId, raw) {
+        const { functions } = await this.createClient(envId);
+        var func = functionValidator(raw);
+        await functions.createFunction(func)
     }
 }
 module.exports = cloudbaseService;

@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "start": "cross-env NODE_ENV=production nodemon ./bin/www"
+    "start": "cross-env NODE_ENV=production nodemon ./bin/www",
+    "pack": "webpack"
   },
   "dependencies": {
     "@cloudbase/manager-node": "^3.11.0",
     "@cloudbase/node-sdk": "^2.7.1",
     "@hapi/joi": "^17.1.1",
+    "busboy": "^0.3.1",
     "canvas": "^2.8.0",
+    "connect-multiparty": "^2.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -22,16 +25,26 @@
     "minimist": "^1.2.5",
     "mongoose": "^6.0.12",
     "morgan": "~1.9.1",
+    "multiparty": "^4.2.2",
     "my-cors": "^1.0.2",
     "nanoid": "^3.1.30",
     "node-email": "^0.0.1",
     "nodemon": "^2.0.14",
+    "tencent-oss": "^0.1.0",
     "tencent-sms": "^0.0.1",
-    "uuid": "^8.3.2"
+    "tls-sig-api-v2": "^1.0.2",
+    "uuid": "^8.3.2",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "axios": "^0.24.0",
+    "compression-webpack-plugin": "^9.0.1",
+    "cron": "^1.8.2",
     "cross-env": "^7.0.3",
     "fs-promise": "^2.0.3",
-    "nan": "^2.15.0"
+    "nan": "^2.15.0",
+    "terser-webpack-plugin": "^5.2.5",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   }
 }

@@ -1,11 +1,12 @@
 var { Router } = require('express');
 var router = Router();
-var roleService = require('../service/role')
+var storageService = require('../service/storage')
 router.post('/create', async function (req, res, next) {
     try {
-        await roleService.create(req.body);
+        await storageService.create(req.body);
         res.json({
-            message: '角色创建成功'
+            data:null,
+            message:'创建成功'
         })
     } catch (error) {
         next(error)
@@ -13,9 +14,9 @@ router.post('/create', async function (req, res, next) {
 })
 router.post('/access', async function (req, res, next) {
     try {
-        let role = await roleService.read(req.body);
+        let storage = await storageService.read(req.body);
         res.json({
-            data: role
+            data: storage
         })
     } catch (error) {
         next(error)
@@ -23,8 +24,7 @@ router.post('/access', async function (req, res, next) {
 })
 router.post('/list', async function (req, res, next) {
     try {
-        console.log('list',req.body)
-        let list = await roleService.list(req.body);
+        let list = await storageService.list(req.body);
         res.json({
             data: list
         })
@@ -34,7 +34,7 @@ router.post('/list', async function (req, res, next) {
 })
 router.post('/modify', async function (req, res, next) {
     try {
-        await roleService.update(req.body);
+        await storageService.update(req.body);
         res.json({
             data: null
         })
@@ -44,7 +44,7 @@ router.post('/modify', async function (req, res, next) {
 })
 router.post('/delete', async function (req, res, next) {
     try {
-        await roleService.delete(req.body);
+        await storageService.delete(req.body);
         res.json({
             data: null
         })

@@ -8,22 +8,21 @@ class roleService {
      * @returns 返回默认用户Route
      */
     static async getBaseRoute() {
-        const { accessRoutes, _id } = await roleModel.findOne({
+        return await roleModel.findOne({
             groupID: 'cXq5WarswhFuqsomo8ZEq',
             roleName: '默认用户'
         })
-        return { accessRoutes, _id };
     }
     /**
      * 
      * @returns 返回默认管理员Route
      */
     static async getManageRoute() {
-        const { accessRoutes, _id } = await roleModel.findOne({
+        return await roleModel.findOne({
             groupID: 'cXq5WarswhFuqsomo8ZEq',
-            roleName: '默认用户'
+            roleName: '默认管理员'
         });
-        return { accessRoutes, _id };
+
     }
     static async create(obj) {
         console.log('role', obj)

@@ -1,21 +1,18 @@
 var { Router } = require('express');
 var router = Router();
-var roleService = require('../service/role')
+var folderService = require('../service/folder')
 router.post('/create', async function (req, res, next) {
     try {
-        await roleService.create(req.body);
-        res.json({
-            message: '角色创建成功'
-        })
+        await folderService.create(req.body);
     } catch (error) {
         next(error)
     }
 })
 router.post('/access', async function (req, res, next) {
     try {
-        let role = await roleService.read(req.body);
+        let folder = await folderService.read(req.body);
         res.json({
-            data: role
+            data: folder
         })
     } catch (error) {
         next(error)
@@ -23,8 +20,7 @@ router.post('/access', async function (req, res, next) {
 })
 router.post('/list', async function (req, res, next) {
     try {
-        console.log('list',req.body)
-        let list = await roleService.list(req.body);
+        let list = await folderService.list(req.body);
         res.json({
             data: list
         })
@@ -34,7 +30,7 @@ router.post('/list', async function (req, res, next) {
 })
 router.post('/modify', async function (req, res, next) {
     try {
-        await roleService.update(req.body);
+        await folderService.update(req.body);
         res.json({
             data: null
         })
@@ -44,7 +40,7 @@ router.post('/modify', async function (req, res, next) {
 })
 router.post('/delete', async function (req, res, next) {
     try {
-        await roleService.delete(req.body);
+        await folderService.delete(req.body);
         res.json({
             data: null
         })

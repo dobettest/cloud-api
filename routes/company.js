@@ -11,9 +11,15 @@ router.post('/create', async function (req, res, next) {
         next(error)
     }
 })
-router.post('/login', async function (req, res, next) {
-    let { userID, env } = req.body;
-    let ticket = await companyService.createTicket({ env, customUserId: userID });
+router.post('/list', async function (req, res, next) {
+    try {
+        let companyies = await companyService.read(req.body);
+        res.json({
+            data: companyies
+        })
+    } catch (error) {
+        next(error)
+    }
 
 })
 module.exports = router;

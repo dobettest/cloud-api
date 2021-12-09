@@ -25,7 +25,7 @@ var userValidator = joi.object({
     email: joi.string().email(),
     gender: joi.string().default('男'),
     location: joi.string().default('中国'),//国家,省份,城市,区县, 
-    roles: joi.array().items(joi.string()).default([]),
+    roles: joi.array(),
     birthday: joi.date().default("2000-01-01"),
     rest: joi.number().default(0)//余额
 })

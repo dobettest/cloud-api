@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 var { Schema, model } = mongoose;
 var joi = require('@hapi/joi')
 var companySchema = new Schema({
+    logo:String,
     companyID:String,
     companyName: String,
     timID: Number,//tim sdkid
@@ -15,6 +16,7 @@ var companySchema = new Schema({
     rest: Number//账户余额
 })
 var companyValidator = joi.object({
+    logo:joi.string().default('https://cdn.dobettest.cn/img/logo.svg'),
     companyID:joi.string().required(),
     companyName: joi.string().required(),
     timID: joi.number().default(1400586279),//tim sdkid

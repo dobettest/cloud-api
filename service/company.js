@@ -22,18 +22,17 @@ class companyService {
         let company = await companyValidator.validateAsync(obj);
         console.log('company', company);
         await companyModel.create(company);
-        const { _id: id1 } = await roleService.getBaseRoute();
-        const { accessRoutes } = await roleService.getManageRoute();
+        const { services } = await roleService.getManageRoute();
         //创建公司超管角色
-        const { _id: id2 } = await roleService.create({
+        const { _id } = await roleService.create({
             roleName: '超级管理员',
             groupID: companyID,
-            accessRoutes
+            services
         })
         //创建公司超管用户
         await userService.create({
             userName: "超级管理员",
-            roles: [id1, id2]
+            roles: [_id]
         })
     }
     static async update(obj) {

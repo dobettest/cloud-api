@@ -4,6 +4,8 @@ var userService = require('../service/user');
 var commonService = require('../service/common');
 const { genCode } = require('../util');
 const { minutes } = require('../util/time');
+const cloudbaseService = require('../service/cloudbase');
+const companyService = require('../service/company');
 let mailClient = commonService.createEmailClient();
 let smsClient = commonService.createSmsClient();
 /* GET users listing. */
@@ -52,10 +54,23 @@ router.post('/loginByPhone', async function (req, res, next) {
     next(error)
   }
 })
+router.post('/getWorkstations', async function (req, res, next) {
+  try {
+    let { roles } = req.user;
+    let data = await userService.getWorkstations(roles);
+    res.json(
+      {
+        data
+      }
+    )
+  } catch (error) {
+    next(error)
+  }
+})
 router.post('/userInfo', async function (req, res, next) {
   try {
     const { userID } = req.user;
-    let user = await userService.read({ userID }, { password: 0,_v:0 })
+    let user = await userService.read({ userID }, { password: 0, _v: 0 })
     res.json({
       data: user
     })
@@ -75,9 +90,9 @@ router.post('/delete', async function (req, res, next) {
 })
 router.post('/list', async function (req, res, next) {
   try {
-    const data = await userService.list(req.body);
+    const users = await userService.list(req.body);
     res.json({
-      data
+      data: users
     })
   } catch (error) {
     next(error)
@@ -231,6 +246,39 @@ router.post('/checkCodeByMail', async function (req, res, next) {
         })
         break;
     }
+  } catch (error) {
+    next(error)
+  }
+})
+router.post('/cloudbase/createTicket', async function (req, res, next) {
+  try {
+    let company = await companyService.read(req.body);
+    let { private_key_id, private_key, envID } = company;
+    let { userID } = req.user;
+    let ticket = await cloudbaseService.createTicket(envID, userID, private_key_id, private_key);
+    res.json({
+      data: ticket
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+router.post('/tim/createTicket', async function (req, res, next) {
+  try {
+    let userSig = await userService.createTimTicket(req.body);
+    res.json({
+      data: userSig
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+router.post('/upload', async function (req, res, next) {
+  try {
+    console.log('upload', req.body)
+    res.json({
+      data: null
+    })
   } catch (error) {
     next(error)
   }
