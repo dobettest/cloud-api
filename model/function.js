@@ -3,7 +3,7 @@ var triggerValidator = joi.object({
     // name: 触发器的名字
     name: joi.string().required(),
     // type: 触发器类型，目前仅支持 timer （即定时触发器）
-    type: joi.string().only("timer"),
+    type: joi.string().valid("timer"),
     // config: 触发器配置，在定时触发器下，config 格式为 cron 表达式
     config: "0 0 2 1 * * *"
 })

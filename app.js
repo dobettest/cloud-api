@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(jwt({
-  allows: ['/storage','/vblog', '/user/upload', '/user/tim/createTicket', '/user/login', '/user/checkCodeByPhone', '/user/getCodeByPhone', '/user/loginByPhone', '/user/getImgCode', '/user/getCodeByMail', '/user/checkCodeByMail', '/role/create', '/company/create'],
+  allows: ['/test','/storage','/vblog', '/user/upload', '/user/tim/createTicket', '/user/login', '/user/checkCodeByPhone', '/user/getCodeByPhone', '/user/loginByPhone', '/user/getImgCode', '/user/getCodeByMail', '/user/checkCodeByMail', '/role/create', '/company/create'],
   secret: 'dadb0a1798'
 }))
 app.use('/', indexRouter);
@@ -35,6 +35,15 @@ app.use('/role', roleRouter);
 app.use('/vblog', vblogRouter);
 app.use('/storage', storageRouter);
 app.use('/folder', folderRouter);
+app.use('/test',async function (req,res,next) {
+  try {
+    res.json({
+      data:'test'
+    })
+  } catch (error) {
+    next(error)
+  }
+})
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
